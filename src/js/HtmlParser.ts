@@ -8,7 +8,11 @@ export class HtmlParser {
 
   getElements(htmlString: string) {
     const htmlElement = this.domParser.parseFromString(htmlString, "text/html");
-    const element = Array.from(htmlElement.body.children)[0];
+    const element = htmlElement.body.firstElementChild;
+
+    if (!element) {
+      throw new Error("HTMl string is null");
+    }
 
     return this.traverse(element);
   }
@@ -17,7 +21,7 @@ export class HtmlParser {
     const elementObj: ElementObj = {
       type: "element",
       tagName: element.tagName,
-      attribute: [],
+      attributes: [],
       children: [],
     };
 
@@ -25,7 +29,7 @@ export class HtmlParser {
       const attrs = element.attributes;
       for (const attr of attrs) {
         const obj = { name: attr.name, value: attr.value };
-        elementObj.attribute.push(obj);
+        elementObj.attributes.push(obj);
       }
     }
 

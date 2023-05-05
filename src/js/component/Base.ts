@@ -49,7 +49,7 @@ export class Base {
 
   createElement(data: ElementObj) {
     const element = document.createElement(data.tagName);
-    data.attribute.forEach((attr) => {
+    data.attributes.forEach((attr) => {
       element.setAttribute(attr.name, attr.value);
     });
     return element;
