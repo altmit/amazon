@@ -1,7 +1,7 @@
 export interface ElementObj {
   type: string;
   tagName: string;
-  attribute: object[];
+  attribute: { name: string; value: string }[];
   children: (ElementObj | TextElementObj)[];
 }
 

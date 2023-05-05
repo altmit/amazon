@@ -8,11 +8,9 @@ export class HtmlParser {
 
   getElements(htmlString: string) {
     const htmlElement = this.domParser.parseFromString(htmlString, "text/html");
-    const elements = Array.from(htmlElement.body.children);
+    const element = Array.from(htmlElement.body.children)[0];
 
-    return elements.map((element) => {
-      return this.traverse(element);
-    });
+    return this.traverse(element);
   }
 
   traverse(element: Element) {
@@ -26,7 +24,7 @@ export class HtmlParser {
     if (element.hasAttributes()) {
       const attrs = element.attributes;
       for (const attr of attrs) {
-        const obj = { name: [attr.name], value: attr.value };
+        const obj = { name: attr.name, value: attr.value };
         elementObj.attribute.push(obj);
       }
     }
