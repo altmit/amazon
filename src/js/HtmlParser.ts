@@ -8,13 +8,11 @@ export class HtmlParser {
 
   getElements(htmlString: string) {
     const htmlElement = this.domParser.parseFromString(htmlString, "text/html");
-    const element = htmlElement.body.firstElementChild;
+    const elements = Array.from(htmlElement.body.children);
 
-    if (!element) {
-      throw new Error("HTMl string is null");
-    }
-
-    return this.traverse(element);
+    return elements.map((element) => {
+      return this.traverse(element);
+    });
   }
 
   traverse(element: Element) {

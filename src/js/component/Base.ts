@@ -1,35 +1,40 @@
-import { ElementObj, TextElementObj } from "../types";
+import { ElementObj, ElementType, TextElementObj } from "../types";
 import { HtmlParser } from "./../HtmlParser";
 export class Base {
   node: Element;
-  template: string;
   htmlParser: HtmlParser;
-  constructor(template: string) {
-    this.template = template;
+  constructor(tagName: string) {
     this.htmlParser = new HtmlParser();
-    this.node = this.setNode();
+    this.node = document.createElement(tagName);
   }
 
-  setNode() {
-    const elementData = this.htmlParser.getElements(this.template);
-    const element = this.createElement(elementData);
-    if (elementData.children.length) {
-      elementData.children.forEach((child) => {
-        element.appendChild(this.setChild(child));
+  setAttribute(attName: string, attValue: string, target: Element = this.node) {
+    target.setAttribute(attName, attValue);
+  }
+
+  setChildren(...children: Base[]) {
+    children.forEach((child) => {
+      this.node.appendChild(child.node);
+    });
+  }
+
+  setTemplate(template: string) {
+    const elementData = this.htmlParser.getElements(template);
+    if (elementData.length) {
+      elementData.forEach((child) => {
+        this.node.appendChild(this.createChild(child));
       });
     }
-
-    return element;
   }
 
-  setChild(child: ElementObj | TextElementObj) {
+  createChild(child: ElementType) {
     const isElementObj = this.isElementObj(child);
     if (isElementObj) {
       const element = this.createElement(child);
       const children = child.children;
       if (children.length) {
         children.forEach((child) => {
-          element.appendChild(this.setChild(child));
+          element.appendChild(this.createChild(child));
         });
       }
       return element;
@@ -39,18 +44,18 @@ export class Base {
     }
   }
 
-  isElementObj(obj: ElementObj | TextElementObj): obj is ElementObj {
+  isElementObj(obj: ElementType): obj is ElementObj {
     return obj.type === "element";
   }
 
-  isTextElementObj(obj: ElementObj | TextElementObj): obj is TextElementObj {
+  isTextElementObj(obj: ElementType): obj is TextElementObj {
     return obj.type === "text";
   }
 
   createElement(data: ElementObj) {
     const element = document.createElement(data.tagName);
     data.attributes.forEach((attr) => {
-      element.setAttribute(attr.name, attr.value);
+      this.setAttribute(attr.name, attr.value, element);
     });
     return element;
   }

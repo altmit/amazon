@@ -9,3 +9,5 @@ export interface TextElementObj {
   type: string;
   text: string | null;
 }
+
+export type Element = ElementObj | TextElementObj;
