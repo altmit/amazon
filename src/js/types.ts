@@ -10,4 +10,4 @@ export interface TextElementObj {
   text: string | null;
 }
 
-export type Element = ElementObj | TextElementObj;
+export type ElementType = ElementObj | TextElementObj;
