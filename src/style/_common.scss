@@ -1,0 +1,78 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css");
+
+:root {
+  --font-family: "Pretendard Variable";
+
+  --white: #ffffff;
+  --gray100: #eff2f2;
+  --gray200: #e5e9e9;
+  --gray300: #dce0e0;
+  --gray400: #d5d5d5;
+  --gray500: #c1c1c1;
+  --gray600: #878787;
+  --gray700: #535353;
+  --gray800: #2a3648;
+  --gray900: #1b232f;
+  --black: #10141a;
+  --black40: rgba(16, 20, 26, 0.4);
+  --primary-yellow100: #fed15f;
+  --primary-yellow200: #febe30;
+  --primary-yellow300: #de9408;
+  --primary-orange100: #fcb057;
+  --primary-orange200: #ff9900;
+  --secondary-purple: #941387;
+  --secondary-navy: #074099;
+  --secondary-green: #0c5e72;
+}
+
+@mixin BoldXL {
+  font-family: var(--font-family);
+  font-style: normal;
+  font-weight: 800;
+  font-size: 28px;
+  line-height: 33px;
+}
+
+@mixin BoldLG {
+  font-family: var(--font-family);
+  font-style: normal;
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 21px;
+}
+@mixin BoldMD {
+  font-family: var(--font-family);
+  font-style: normal;
+  font-weight: 800;
+  font-size: 13px;
+  line-height: 16px;
+
+  letter-spacing: -0.06em;
+}
+@mixin BoldSM {
+  font-family: var(--font-family);
+  font-style: normal;
+  font-weight: 600;
+  font-size: 11px;
+  line-height: 13px;
+
+  letter-spacing: -0.06em;
+}
+@mixin BodyMD {
+  font-family: var(--font-family);
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 160%;
+
+  letter-spacing: -0.03em;
+}
+@mixin BodySM {
+  font-family: var(--font-family);
+  font-style: normal;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 160%;
+
+  letter-spacing: -0.03em;
+}
