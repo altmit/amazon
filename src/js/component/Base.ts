@@ -3,6 +3,7 @@ import { HtmlParser } from "./../HtmlParser";
 export class Base {
   node: Element;
   htmlParser: HtmlParser;
+  components: { [key: string]: HTMLElement } = {};
   constructor(tagName: string) {
     this.htmlParser = new HtmlParser();
     this.node = document.createElement(tagName);
@@ -56,6 +57,9 @@ export class Base {
     const element = document.createElement(data.tagName);
     data.attributes.forEach((attr) => {
       this.setAttribute(attr.name, attr.value, element);
+      if (attr.name === "data-component") {
+        this.components[attr.value] = element;
+      }
     });
     return element;
   }
